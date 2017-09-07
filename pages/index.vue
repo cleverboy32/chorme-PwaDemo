@@ -2,7 +2,7 @@
     <div>
         <div class="title">welcome to this demo</div>
         <div class="img">
-            <img src="http://localhost:8090/api/400/200/">
+            <img src="https://lorempixel.com/400/200/">
         </div>
         <div>
             <button>订阅图片</button>
