@@ -1,13 +1,16 @@
 // import env from '../build/env.conf.js';
 let swRegistration = null;
+let isSubscribe = false;
 const applicationServerPublicKey='BO_R6m8osilNmdOhEHk-KF0o1u-EPruOL1bDaISHwDwSLacPsh35Hg41nZpS00XeCLG-KbGEqx35x6PKsdZNVCk';
 (() => {
     let env = 'prod';
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-        let url = env === 'prod' ? 'prod-service-worker.js' : 'service-worker.js';
-      
+        // let url = env === 'prod' ? 'prod-service-worker.js' : 'service-worker.js';
+        url = 'prod-service-worker.js';     
         navigator.serviceWorker.register(url).then(function(swReg) {
             swRegistration = swReg;
+            
+            btn.addEventListener('click', btnClick, true);
         }).catch(function(error) {
             console.error('Service Worker Error', error);
         });
@@ -17,28 +20,15 @@ const applicationServerPublicKey='BO_R6m8osilNmdOhEHk-KF0o1u-EPruOL1bDaISHwDwSLa
     }
 })();
 
-export default {
-    btnClick: (isSubscribe) => {
-        if (isSubscribe) {
-            unsubscribe();
-        } else {
-            console.log('11');
-            subscribeUser();
-        }
-    },
-    fresh: (img) =>  {
-        var imgFresh = setInterval(function () {
-            let testimg = document.createElement('img');
-            testimg.src="https://lorempixel.com/400/200/";
-            // 如果有网的话在刷新
-            testimg.onload = () => {
-                img.src = 'https://lorempixel.com/400/200/';
-            }
-            testimg.onerror = () => {
-                clearInterval(imgFresh);
-                setTimeout(fresh, 180000);
-            };
-        }, 30000);
+
+let p = document.querySelector('p');
+let btn = document.querySelector('button');
+
+function btnClick() {
+    if (isSubscribe) {
+        unsubscribeUser();
+    } else {
+        subscribeUser();
     }
 }
 function urlB64ToUint8Array(base64String) {
@@ -56,14 +46,14 @@ function urlB64ToUint8Array(base64String) {
     return outputArray;
 }
 function subscribeUser() {
-    console.log(22);
     const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
     swRegistration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: applicationServerKey
     }).then((subscription) => {
         console.log('user is subscribed:', subscription);
-        return Promise.resolve(true);
+        isSubscribe = true;
+        updateBtn();
     }).catch((err) => {
         console.log('failed to subscribe', err);
     });
@@ -83,6 +73,17 @@ function unsubscribeUser() {
         console.log('err unsubscribe', err);
     }).then(() => {
         console.log('user is unsubscribed');
-        return Promise.resolve(false);
+        isSubscribe = false;
+        updateBtn();
     })
+}
+
+function updateBtn() {
+    if(isSubscribe) {
+        btn.innerText = '订阅成功';
+        p.innerText = 'ok, we will message you at every time picture change. and thanks for your subscribe,you like is our chase.'
+    } else {
+        btn.innerText = '订阅图片';
+        p.innerText = 'you can subscribe, then we will message you picture change. dont you want see new picture?its beatiful.'
+    }
 }

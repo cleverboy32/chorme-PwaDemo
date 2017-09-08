@@ -5,14 +5,10 @@
             <img src="https://lorempixel.com/400/200/" ref="img">
         </div>
         <div>
-            <button @click="subscribe">订阅图片</button>
+            <button>订阅图片</button>
         </div>
         <div class="message">
-            <p v-if="subcribe">
-                ok, we will message you at every time picture change. and thanks for your subscribe,
-                you like is our chase.
-            </p>
-            <p v-else>
+            <p>
                 you can subscribe, then we will message you picture change. dont you want see new picture?
                 its beatiful.
             </p>
@@ -21,24 +17,26 @@
 </template>
 
 <script>
-import util from '../scripts/app.js';
-
 export default {
     name: 'index',
-    data () {
-        return {
-            subcribe: false
-        }
-    },
     mounted () {
         let img = this.$refs.img;
-        util.fresh(img);
+        this.fresh(img);
     },
     methods: {
-        subscribe () {
-            util.btnClick().then((data) => {
-                this.subcribe = data;
-            });
+        fresh (img) {
+            var imgFresh = setInterval(function () {
+                let testimg = document.createElement('img');
+                testimg.src="https://lorempixel.com/400/200/";
+                // 如果有网的话在刷新
+                testimg.onload = () => {
+                    img.src = 'https://lorempixel.com/400/200/';
+                }
+                testimg.onerror = () => {
+                    clearInterval(imgFresh);
+                    setTimeout(fresh, 180000);
+                };
+            }, 30000);
         }
     }
 }
