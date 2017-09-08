@@ -4,7 +4,7 @@ let cacheName = 'pwa-demo-assets';
 let imgCacheName = 'pwa-img';
 let filesToCache;
 
-let filesToCache = [
+filesToCache = [
     '/chorme-PwaDemo',
     '/chorme-PwaDemo/index.html',
     '/chorme-PwaDemo/scripts/app.js',
