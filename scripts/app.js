@@ -2,7 +2,7 @@
 let swRegistration = null;
 const applicationServerPublicKey='BO_R6m8osilNmdOhEHk-KF0o1u-EPruOL1bDaISHwDwSLacPsh35Hg41nZpS00XeCLG-KbGEqx35x6PKsdZNVCk';
 (() => {
-    let env = 'dev';
+    let env = 'prod';
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         let url = env === 'prod' ? 'prod-service-worker.js' : 'service-worker.js';
       
