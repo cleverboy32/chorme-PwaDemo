@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "NODE_ENV=development webpack",
     "prod": "NODE_ENV=production webpack",
-    "start": "webpack-dev-server --inline --hot --port 8090",
+    "start": "node build/env.conf.js && webpack-dev-server --inline --hot --port 8090",
     "watch": "NODE_ENV=development webpack --watch"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "node-sass": "^3.7.0",
+    "require": "^2.4.20",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
