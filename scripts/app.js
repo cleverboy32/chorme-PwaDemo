@@ -4,19 +4,21 @@ let isSubscribe = false;
 const applicationServerPublicKey='BO_R6m8osilNmdOhEHk-KF0o1u-EPruOL1bDaISHwDwSLacPsh35Hg41nZpS00XeCLG-KbGEqx35x6PKsdZNVCk';
 (() => {
     let env = 'prod';
+    let btn = document.querySelector('button');
+
     if ('serviceWorker' in navigator && 'PushManager' in window) {
         let url = env === 'prod' ? 'prod-service-worker.js' : 'service-worker.js';
         // url = 'prod-service-worker.js';     
         navigator.serviceWorker.register(url).then(function(swReg) {
             swRegistration = swReg;
-            
+            console.log(btn);
             btn.addEventListener('click', btnClick, true);
         }).catch(function(error) {
             console.error('Service Worker Error', error);
         });
     } else {
         console.warn('Push messaging is not supported');
-        pushButton.textContent = 'Push Not Supported';
+        btn.textContent = 'Push Not Supported';
     }
 })();
 
