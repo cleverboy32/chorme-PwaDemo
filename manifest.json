@@ -3,17 +3,17 @@
     "name": "pwa-demo",
     "icons": [
         {
-            "src": "../assets/imgs/48.png",
+            "src": "./manifestimg/48.png",
             "type": "image/png",
             "sizes": "48x48"
         },
         {
-            "src": "../assets/imgs/96.png",
+            "src": "./manifestimg/96.png",
             "type": "image/png",
             "sizes": "96x96"
         },
         {
-            "src": "../assets/imgs/192.png",
+            "src": "./manifestimg/192.png",
             "type": "image/png",
             "sizes": "192x192"
         }
