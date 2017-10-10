@@ -5,8 +5,8 @@ const applicationServerPublicKey='BO_R6m8osilNmdOhEHk-KF0o1u-EPruOL1bDaISHwDwSLa
 (() => {
     let env = 'prod';
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-        // let url = env === 'prod' ? 'prod-service-worker.js' : 'service-worker.js';
-        url = 'prod-service-worker.js';     
+        let url = env === 'prod' ? 'prod-service-worker.js' : 'service-worker.js';
+        // url = 'prod-service-worker.js';     
         navigator.serviceWorker.register(url).then(function(swReg) {
             swRegistration = swReg;
             
@@ -51,7 +51,7 @@ function subscribeUser() {
         userVisibleOnly: true,
         applicationServerKey: applicationServerKey
     }).then((subscription) => {
-        console.log('user is subscribed:', subscription);
+        console.log('user is subscribed:', JSON.stringify(subscription));
         isSubscribe = true;
         updateBtn();
     }).catch((err) => {

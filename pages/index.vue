@@ -73,9 +73,11 @@ button:active {
 }
 .message {
     margin-top: 30px;
+    text-align: center;
+    padding: 0px 10%;
     p {
         margin: 0 auto;
-        width: 80%;
+        display: inline;
         text-align: justify; 
     }
 }
