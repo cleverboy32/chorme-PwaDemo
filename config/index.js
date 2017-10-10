@@ -9,7 +9,7 @@ var Conf = {
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: '.',
-    assetsPublicPath: '.',
+    assetsPublicPath: '/',
     chunkFilenameFormat: chunkFilenameFormat,
     env: 'dev',
     port: projectConfig.port,

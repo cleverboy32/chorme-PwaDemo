@@ -2,7 +2,6 @@ var webpack = require('webpack'),
 ExtractTextPlugin = require('extract-text-webpack-plugin'),
 HtmlWebpackPlugin = require('html-webpack-plugin');
 var config = require('./config');
-
 const cleanWebpackPlugin = require('clean-webpack-plugin')
 
 paths = {
@@ -18,13 +17,13 @@ var Configrue = {
     entry: {
         'index': './main.js',
         'app': './scripts/app.js',
-        'devsw': './service-worker.js',
-        'prodsw': './prod-service-worker.js'
+        'service-worker': './service-worker.js',
+        'prod-service-worker': './prod-service-worker.js'
     },
     output: {
-        path: paths.dist.root,
-        filename: '[name].js',
-        publicPath: 'http://localhost:8080/dist/'
+        path: __dirname + '/dist',
+        filename: '[name].js'
+        // publicPath: 'http://localhost:8080/dist/'
     },
     devServer: {
         host: '',
