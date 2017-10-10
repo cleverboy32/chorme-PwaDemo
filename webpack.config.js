@@ -1,5 +1,10 @@
 var webpack = require('webpack'),
 ExtractTextPlugin = require('extract-text-webpack-plugin'),
+HtmlWebpackPlugin = require('html-webpack-plugin');
+var config = require('./config');
+
+const cleanWebpackPlugin = require('clean-webpack-plugin')
+
 paths = {
     root: '/',
     source: root,
@@ -11,11 +16,14 @@ paths = {
 };
 var Configrue = {
     entry: {
-        app: ['./main.js'],
+        'index': './main.js',
+        'app': './scripts/app.js',
+        'devsw': './service-worker.js',
+        'prodsw': './prod-service-worker.js'
     },
     output: {
         path: paths.dist.root,
-        filename: 'js/[name].js',
+        filename: '[name].js',
         publicPath: 'http://localhost:8080/dist/'
     },
     devServer: {
@@ -67,8 +75,21 @@ var Configrue = {
         presets: ['es2015', 'stage-0']
     },
     plugins: [
+        // new cleanWebpackPlugin(['dist']),
         new ExtractTextPlugin('css/style.css'),
-    ],
+        new HtmlWebpackPlugin({
+            filename: config.index,
+            template: 'index.html',
+            inject: true,
+            chunks: ['app', 'index'],
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeAttributeQuotes: true
+            },
+            chunksSortMode: 'dependency'
+        })
+    ]
 };
 
 if (process.env.NODE_ENV === 'production') {
