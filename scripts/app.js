@@ -3,15 +3,13 @@ let swRegistration = null;
 let isSubscribe = false;
 const applicationServerPublicKey='BO_R6m8osilNmdOhEHk-KF0o1u-EPruOL1bDaISHwDwSLacPsh35Hg41nZpS00XeCLG-KbGEqx35x6PKsdZNVCk';
 (() => {
-    let env = 'prod';
+    let env = 'dev';
     let btn = document.querySelector('button');
 
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-        let url = env === 'prod' ? 'prod-service-worker.js' : 'service-worker.js';
-        // url = 'prod-service-worker.js';     
+        let url = env === 'prod' ? './prodServiceWorker.js' : './serviceWorker.js';
         navigator.serviceWorker.register(url).then(function(swReg) {
             swRegistration = swReg;
-            console.log(btn);
             btn.addEventListener('click', btnClick, true);
         }).catch(function(error) {
             console.error('Service Worker Error', error);

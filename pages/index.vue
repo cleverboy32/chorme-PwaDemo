@@ -22,6 +22,7 @@ export default {
     mounted () {
         let img = this.$refs.img;
         this.fresh(img);
+        console.log('hhhhhhh');
     },
     methods: {
         fresh (img) {

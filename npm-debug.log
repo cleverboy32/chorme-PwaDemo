@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/cleverboy32/.nvm/versions/node/v6.11.0/bin/node',
+1 verbose cli   '/Users/cleverboy32/.nvm/versions/node/v6.11.0/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'prod' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.0
+4 verbose run-script [ 'preprod', 'prod', 'postprod' ]
+5 info lifecycle pwa-vue@1.0.0~preprod: pwa-vue@1.0.0
+6 silly lifecycle pwa-vue@1.0.0~preprod: no script for preprod, continuing
+7 info lifecycle pwa-vue@1.0.0~prod: pwa-vue@1.0.0
+8 verbose lifecycle pwa-vue@1.0.0~prod: unsafe-perm in lifecycle true
+9 verbose lifecycle pwa-vue@1.0.0~prod: PATH: /Users/cleverboy32/.nvm/versions/node/v6.11.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/cleverboy32/Documents/work/chorme-PwaDemo/node_modules/.bin:/Users/cleverboy32/.nvm/versions/node/v6.11.0/bin:/Users/cleverboy32/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/cleverboy32/bin:/Users/cleverboy32/phantomjs-2.1.1/bin:/Users/cleverboy32/phantomjs-2.1.1/bin
+10 verbose lifecycle pwa-vue@1.0.0~prod: CWD: /Users/cleverboy32/Documents/work/chorme-PwaDemo
+11 silly lifecycle pwa-vue@1.0.0~prod: Args: [ '-c', 'NODE_ENV=production webpack' ]
+12 silly lifecycle pwa-vue@1.0.0~prod: Returned: code: 2  signal: null
+13 info lifecycle pwa-vue@1.0.0~prod: Failed to exec prod script
+14 verbose stack Error: pwa-vue@1.0.0 prod: `NODE_ENV=production webpack`
+14 verbose stack Exit status 2
+14 verbose stack     at EventEmitter.<anonymous> (/Users/cleverboy32/.nvm/versions/node/v6.11.0/lib/node_modules/npm/lib/utils/lifecycle.js:255:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (/Users/cleverboy32/.nvm/versions/node/v6.11.0/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:891:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+15 verbose pkgid pwa-vue@1.0.0
+16 verbose cwd /Users/cleverboy32/Documents/work/chorme-PwaDemo
+17 error Darwin 16.7.0
+18 error argv "/Users/cleverboy32/.nvm/versions/node/v6.11.0/bin/node" "/Users/cleverboy32/.nvm/versions/node/v6.11.0/bin/npm" "run" "prod"
+19 error node v6.11.0
+20 error npm  v3.10.10
+21 error code ELIFECYCLE
+22 error pwa-vue@1.0.0 prod: `NODE_ENV=production webpack`
+22 error Exit status 2
+23 error Failed at the pwa-vue@1.0.0 prod script 'NODE_ENV=production webpack'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the pwa-vue package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     NODE_ENV=production webpack
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs pwa-vue
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls pwa-vue
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
