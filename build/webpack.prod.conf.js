@@ -53,7 +53,7 @@ var webpackConfig = merge(baseWebpackConfig, {
             filename: config.build.index,
             template: 'index.html',
             chunksSortMode: 'manual',
-            chunks: ['index', 'app'],
+            chunks: ['vendor', 'index', 'app'],
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
