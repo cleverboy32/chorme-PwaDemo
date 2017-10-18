@@ -7,11 +7,10 @@ let filesToCache;
 filesToCache = [
     '/chorme-PwaDemo',
     '/chorme-PwaDemo/index.html',
+    '/chorme-PwaDemo/scripts/app.js',
     '/chorme-PwaDemo/img/48.png',
     '/chorme-PwaDemo/img/96.png',
     '/chorme-PwaDemo/img/192.png',
-    '/chorme-PwaDemo/dist/css/index.c52d3f17e9a2a01c75ac1837c4c04c5c',
-    '/chorme-PwaDemo/dist/css/index.c52d3f17e9a2a01c75ac1837c4c04c5c.css',
     '/chorme-PwaDemo/dist/js/app.b1ddc7576a96563095de.js',
     '/chorme-PwaDemo/dist/js/app.b1ddc7576a96563095de.js.map',
     '/chorme-PwaDemo/dist/js/index.1e0670a6c320fc5b84db.js',
@@ -20,6 +19,8 @@ filesToCache = [
     '/chorme-PwaDemo/dist/js/manifest.93300fef4e75c3c85104.js.map',
     '/chorme-PwaDemo/dist/js/vendor.03c11b30cbc224e4ab9e.js',
     '/chorme-PwaDemo/dist/js/vendor.03c11b30cbc224e4ab9e.js.map',
+    '/chorme-PwaDemo/dist/css/index.c52d3f17e9a2a01c75ac1837c4c04c5c.js',
+    '/chorme-PwaDemo/dist/css/index.c52d3f17e9a2a01c75ac1837c4c04c5c.js.map',
     '/chorme-PwaDemo/manifest.json'
 ];
 
