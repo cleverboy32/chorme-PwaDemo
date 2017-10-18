@@ -1,5 +1,3 @@
-'use strict'
-
 let cacheName = 'pwa-demo-assets';
 let filesToCache;
 
@@ -17,8 +15,8 @@ filesToCache = [
     '/chorme-PwaDemo/static/js/manifest.575c1c4599a5d63fe761.js.map',
     '/chorme-PwaDemo/static/js/vendor.03c11b30cbc224e4ab9e.js',
     '/chorme-PwaDemo/static/js/vendor.03c11b30cbc224e4ab9e.js.map',
-    '/chorme-PwaDemo/static/css/app.c52d3f17e9a2a01c75ac1837c4c04c5c.js',
-    '/chorme-PwaDemo/static/css/app.c52d3f17e9a2a01c75ac1837c4c04c5c.js.map',
+    '/chorme-PwaDemo/static/css/app.c52d3f17e9a2a01c75ac1837c4c04c5c.css',
+    '/chorme-PwaDemo/static/css/app.c52d3f17e9a2a01c75ac1837c4c04c5c.css.map',
     '/chorme-PwaDemo/manifest.json',
     '/chorme-PwaDemo/sw.js'
     
