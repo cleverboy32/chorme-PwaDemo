@@ -1,13 +1,11 @@
 'use strict'
 
 let cacheName = 'pwa-demo-assets';
-// let imgCacheName = 'pwa-img';
 let filesToCache;
 
 filesToCache = [
     '/chorme-PwaDemo',
     '/chorme-PwaDemo/index.html',
-    '/chorme-PwaDemo/scripts/app.js',
     '/chorme-PwaDemo/img/48.png',
     '/chorme-PwaDemo/img/96.png',
     '/chorme-PwaDemo/img/192.png',
@@ -21,7 +19,9 @@ filesToCache = [
     '/chorme-PwaDemo/static/js/vendor.03c11b30cbc224e4ab9e.js.map',
     '/chorme-PwaDemo/static/css/app.c52d3f17e9a2a01c75ac1837c4c04c5c.js',
     '/chorme-PwaDemo/static/css/app.c52d3f17e9a2a01c75ac1837c4c04c5c.js.map',
-    '/chorme-PwaDemo/manifest.json'
+    '/chorme-PwaDemo/manifest.json',
+    '/chorme-PwaDemo/sw.js'
+    
 ];
 
 self.addEventListener('install', function (e) {
