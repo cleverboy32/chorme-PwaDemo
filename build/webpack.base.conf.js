@@ -2,44 +2,11 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
-var GenerateAssetPlugin = require('generate-asset-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 function resolve (dir) {
     return path.join(__dirname, '..', dir)
 }
-
-// 这就是那个manifestJson
-var manifestJson = function(compilation) {
-    console.log(JSON.stringify(compilation.assets['imgs/48.png']));
-    let manifest = {
-        short_name: "pwa",
-        name: "pwa - demo",
-        icons: [
-            {
-                src: "./imgs/48.png",
-                type: "image/png",
-                sizes: "48x48"
-            },
-            {
-                src: "./imgs/96.png",
-                type: "image/png",
-                sizes: "96x96"
-            },
-            {
-                src: "./imgs/192.png",
-                type: "image/png",
-                sizes: "192x192"
-            }
-        ],
-        background_color: "#2196F3",
-        theme_color: "#2196F3",
-        display: "standalone",
-        start_url: "index.html?launcher=true"
-    }
-
-    return JSON.stringify(manifest);
-};
 
 module.exports = {
     entry: {
@@ -115,7 +82,7 @@ module.exports = {
         ]
     },
     plugins: [
-        // copy custom static assets
+        // 复制 pwa 所需的文件到 输出的地方
         new CopyWebpackPlugin([
             {
                 from: 'imgs',

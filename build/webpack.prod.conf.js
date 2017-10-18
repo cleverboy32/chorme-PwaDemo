@@ -80,8 +80,8 @@ var webpackConfig = merge(baseWebpackConfig, {
             name: 'manifest',
             chunks: ['vendor']
         }),
-        // copy custom static assets
-        new CopyWebpackPlugin([
+        // 这里复制sw文件到输出的地方，生产环境下输出到dist 路径下
+        new CopyWebpackPlugin([ 
             {
                 from: 'prod-service-worker.js',
                 to: 'sw.js'

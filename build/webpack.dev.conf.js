@@ -4,7 +4,7 @@ var config = require('../config')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin') // 复制文件插件
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 // add hot-reload related code to entry chunks
@@ -36,7 +36,8 @@ module.exports = merge(baseWebpackConfig, {
                 removeAttributeQuotes: true
             }
         }),
-        new CopyWebpackPlugin([
+        // 这里复制sw文件到输出的地方，生产环境下输出到localhost:7022 路径下
+        new CopyWebpackPlugin([ 
             {
                 from: 'service-worker.js',
                 to: 'sw.js'
