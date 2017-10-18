@@ -1,19 +1,14 @@
-// import env from '../build/env.conf.js';
 let swRegistration = null;
 let isSubscribe = false;
-const applicationServerPublicKey='BO_R6m8osilNmdOhEHk-KF0o1u-EPruOL1bDaISHwDwSLacPsh35Hg41nZpS00XeCLG-KbGEqx35x6PKsdZNVCk';
+const applicationServerPublicKey = 'BO_R6m8osilNmdOhEHk-KF0o1u-EPruOL1bDaISHwDwSLacPsh35Hg41nZpS00XeCLG-KbGEqx35x6PKsdZNVCk';
 (() => {
-    let env = 'prod';
     let btn = document.querySelector('button');
 
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-        let url = env === 'prod' ? 'prod-service-worker.js' : 'service-worker.js';
-        // url = 'prod-service-worker.js';     
-        navigator.serviceWorker.register(url).then(function(swReg) {
+        navigator.serviceWorker.register('sw.js').then((swReg) => {
             swRegistration = swReg;
-            console.log(btn);
             btn.addEventListener('click', btnClick, true);
-        }).catch(function(error) {
+        }).catch((error) => {
             console.error('Service Worker Error', error);
         });
     } else {
@@ -22,32 +17,31 @@ const applicationServerPublicKey='BO_R6m8osilNmdOhEHk-KF0o1u-EPruOL1bDaISHwDwSLa
     }
 })();
 
-
 let p = document.querySelector('p');
 let btn = document.querySelector('button');
 
-function btnClick() {
+function btnClick () {
     if (isSubscribe) {
         unsubscribeUser();
     } else {
         subscribeUser();
     }
 }
-function urlB64ToUint8Array(base64String) {
+function urlB64ToUint8Array (base64String) {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding)
       .replace(/\-/g, '+')
       .replace(/_/g, '/');
-  
+
     const rawData = window.atob(base64);
     const outputArray = new Uint8Array(rawData.length);
-  
+
     for (let i = 0; i < rawData.length; ++i) {
         outputArray[i] = rawData.charCodeAt(i);
     }
     return outputArray;
 }
-function subscribeUser() {
+function subscribeUser () {
     const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
     swRegistration.pushManager.subscribe({
         userVisibleOnly: true,
@@ -61,14 +55,9 @@ function subscribeUser() {
     });
 }
 
-function updateSubscriptionOnServer(subscription) {
-    // TODO: Send subscription to application server
-    console.log(33);
-}
-
-function unsubscribeUser() {
+function unsubscribeUser () {
     swRegistration.pushManager.getSubscription().then((subscription) => {
-        if(subscription) {
+        if (subscription) {
             return subscription.unsubscribe();
         }
     }).catch((err) => {
@@ -80,8 +69,8 @@ function unsubscribeUser() {
     })
 }
 
-function updateBtn() {
-    if(isSubscribe) {
+function updateBtn () {
+    if (isSubscribe) {
         btn.innerText = '订阅成功';
         p.innerText = 'ok, we will message you at every time picture change. and thanks for your subscribe,you like is our chase.'
     } else {

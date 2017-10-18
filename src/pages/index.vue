@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="title">welcome to this demo</div>
-        <div class="img">
-            <img src="https://lorempixel.com/400/200/" ref="img">
+        <div class='title'>welcome to this demo</div>
+        <div class='img'>
+            <img src='https://lorempixel.com/400/200/' ref='img'>
         </div>
         <div>
             <button>订阅图片</button>
         </div>
-        <div class="message">
+        <div class='message'>
             <p>
                 you can subscribe, then we will message you picture change. dont you want see new picture?
                 its beatiful.
@@ -27,21 +27,21 @@ export default {
         fresh (img) {
             var imgFresh = setInterval(function () {
                 let testimg = document.createElement('img');
-                testimg.src="https://lorempixel.com/400/200/";
+                testimg.src = 'https://lorempixel.com/400/200/';
                 // 如果有网的话在刷新
                 testimg.onload = () => {
                     img.src = 'https://lorempixel.com/400/200/';
                 }
                 testimg.onerror = () => {
                     clearInterval(imgFresh);
-                    setTimeout(fresh, 180000);
+                    setTimeout(this.fresh, 180000);
                 };
             }, 30000);
         }
     }
 }
 </script>
-<style lang="less">
+<style lang='less'>
 div {
     text-align: center;
 }
