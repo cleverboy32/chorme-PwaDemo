@@ -28,8 +28,8 @@ module.exports = merge(baseWebpackConfig, {
     // https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             template: 'index.html',
-            chunksSortMode: 'manual',
-            chunks: ['index', 'app'],
+            chunksSortMode: 'dependency',
+            inject: true,
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,

@@ -52,8 +52,8 @@ var webpackConfig = merge(baseWebpackConfig, {
         new HtmlWebpackPlugin({
             filename: config.build.index,
             template: 'index.html',
-            chunksSortMode: 'manual',
-            chunks: ['vendor', 'index', 'app'],
+            chunksSortMode: 'dependency',
+            inject: true,
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,

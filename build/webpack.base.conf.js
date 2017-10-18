@@ -10,8 +10,8 @@ function resolve (dir) {
 
 module.exports = {
     entry: {
-        index: './src/main.js',
-        app: './scripts/app.js'
+        app: './src/main.js',
+        registerSw: './scripts/app.js'
     },
     output: {
         path: __dirname + '/dist',
