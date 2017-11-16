@@ -1,4 +1,3 @@
-'use strict'
 
 let cacheName = 'pwa-demo-assets';
 // let imgCacheName = 'pwa-img';
@@ -6,19 +5,22 @@ let filesToCache;
 
 filesToCache = [
     '/',
-    '/index.js',
+    '/index.html',
     '/app.js',
-    'img/48.png',
-    'img/96.png',
-    'img/192.png',
+    '/img/48.png',
+    '/img/96.png',
+    '/img/192.png',
     '/manifest.json'
 ];
 
 self.addEventListener('install', function (e) {
+    console.log('sw install');
     e.waitUntil(
         caches.open(cacheName).then(function (cache) {
             console.log('sw install');
             return cache.addAll(filesToCache);
+        }, function (err) {
+            console.log(err);
         })
     );
 });
@@ -61,6 +63,6 @@ self.addEventListener('notificationclick', function (event) {
     event.notification.close();
 
     event.waitUntil(
-        clients.openWindow('https://developers.google.com/web/')
+        clients.openWindow('https://developers.google.com/web/') // eslint-disable-line
     );
 });
