@@ -17,11 +17,14 @@
 </template>
 
 <script>
+import API from '../api';
+
 export default {
     name: 'index',
     mounted () {
         let img = this.$refs.img;
         this.fresh(img);
+        API.getUser();
     },
     methods: {
         fresh (img) {

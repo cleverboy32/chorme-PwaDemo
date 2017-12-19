@@ -20,12 +20,16 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // https://github.com/chimurai/http-proxy-middleware
 var proxyTable = config.dev.proxyTable
 
-var app = express()
+var app = require('../server/app.js')
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
-    quiet: true
+    quiet: true,
+    stats: {   
+        colors: true,    
+        chunks: true  
+    }
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {

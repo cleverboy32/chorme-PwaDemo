@@ -6,13 +6,25 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "start": "node build/dev-server.js",
+    "start": "cross-env NODE_ENV=development node server/bin/www",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "consolidate": "^0.15.0",
+    "cookie-parser": "^1.4.3",
+    "cross-env": "^5.1.1",
+    "favicon": "0.0.2",
+    "handlebars": "^4.0.11",
+    "hogan": "^1.0.2",
+    "logger": "0.0.1",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7",
     "vue": "^2.3.3",
-    "vue-router": "^2.6.0"
+    "vue-router": "^2.6.0",
+    "winston": "^3.0.0-rc1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
