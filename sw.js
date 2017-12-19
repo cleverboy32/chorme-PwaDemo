@@ -8,7 +8,6 @@ self.addEventListener('install', function (e) {
 
 // 更新缓存
 self.addEventListener('activate', function (e) {
-    caches.delete(cacheName);
     e.waitUntil(self.clients.claim());
 });
 
