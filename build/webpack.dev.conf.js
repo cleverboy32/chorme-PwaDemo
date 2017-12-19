@@ -6,6 +6,8 @@ var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin') // 复制文件插件
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var CleanPlugin = require("clean-webpack-plugin");
+
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -22,6 +24,7 @@ module.exports = merge(baseWebpackConfig, {
         new webpack.DefinePlugin({
             'process.env': config.dev.env
         }),
+        new CleanPlugin(),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),

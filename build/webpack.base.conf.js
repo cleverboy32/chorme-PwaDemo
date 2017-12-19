@@ -3,6 +3,7 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 function resolve (dir) {
     return path.join(__dirname, '..', dir)
@@ -82,6 +83,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanWebpackPlugin(['./sw.js']),
         // 复制 pwa 所需的文件到 输出的地方
         new CopyWebpackPlugin([
             {

@@ -7,11 +7,6 @@ let filesToCache;
 filesToCache = [
     '/chorme-PwaDemo',
     '/chorme-PwaDemo/index.html',
-    '/chorme-PwaDemo/scripts/app.js',
-    '/chorme-PwaDemo/assets/imgs/48.png',
-    '/chorme-PwaDemo/assets/imgs/96.png',
-    '/chorme-PwaDemo/assets/imgs/192.png',
-    '/chorme-PwaDemo/dist/js/app.js',
     '/chorme-PwaDemo/manifest.json'
 ];
 
@@ -26,20 +21,42 @@ self.addEventListener('install', function (e) {
 
 // 更新缓存
 self.addEventListener('activate', function (e) {
-    caches.delete(cacheName);
-    e.waitUntil(
-        caches.open(cacheName).then(function (cache) {
-            return cache.addAll(filesToCache);
-        })
-    );
+    e.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', (e) => {
-    e.respondWith(
-        caches.match(e.request).then(function (response) {
-            return response || fetch(e.request);
-        })
-    );
+    if (/\.jpg$|.png$|.js$|.map$/.test(e.request.url) && e.request.url.indexOf('hot-update.js') === '-1') {
+        console.log(e.request.url);
+        e.respondWith(
+            caches.match(e.request).then(function (response) {
+                let requestToCache = e.request.clone();
+                if (response) {
+                    fetch(requestToCache).then((res) => {
+                        if (res && res.status === 200) {
+                            caches.open(cacheName).then(function (cache) {
+                                cache.delete(requestToCache);
+                                cache.put(requestToCache, res.clone());
+                            });
+                        }
+                    });
+                    return response;
+                }
+
+                return fetch(requestToCache).then((res) => {
+                    if (!res || res.status !== 200) {
+                        return res;
+                    }
+                    var responseToCache = res.clone();
+                    caches.open(cacheName).then(function (cache) {
+                        cache.put(requestToCache, responseToCache);
+                    });
+                    return res;
+                });
+            })
+        );
+    } else {
+        return fetch(e.request);
+    }
 });
 
 // 监听推送事件 然后显示通知

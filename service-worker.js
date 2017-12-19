@@ -1,46 +1,59 @@
 
 let cacheName = 'pwa-demo-assets';
-// let imgCacheName = 'pwa-img';
-let filesToCache;
 
-filesToCache = [
+let assetsfile = [
     '/',
     '/index.html',
-    '/app.js',
-    '/img/48.png',
-    '/img/96.png',
-    '/img/192.png',
     '/manifest.json'
-];
+]
 
 self.addEventListener('install', function (e) {
-    console.log('sw install');
-    e.waitUntil(
-        caches.open(cacheName).then(function (cache) {
-            console.log('sw install');
-            return cache.addAll(filesToCache);
-        }, function (err) {
-            console.log(err);
-        })
-    );
+    caches.open(cacheName).then(function (cache) {
+        console.log('sw install');
+        return cache.addAll(assetsfile);
+    })
+    // e.waitUntil(self.skipWaiting());
 });
 
 // 更新缓存
 self.addEventListener('activate', function (e) {
-    caches.delete(cacheName);
-    e.waitUntil(
-        caches.open(cacheName).then(function (cache) {
-            return cache.addAll(filesToCache);
-        })
-    );
+    e.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', (e) => {
-    e.respondWith(
-        caches.match(e.request).then(function (response) {
-            return response || fetch(e.request);
-        })
-    );
+    if (/\.jpg$|.png$|.js$|.map$/.test(e.request.url) && e.request.url.indexOf('hot-update.js') === -1) {
+        console.log(e.request.url);
+        e.respondWith(
+            caches.match(e.request).then(function (response) {
+                let requestToCache = e.request.clone();
+                if (response) {
+                    fetch(requestToCache).then((res) => {
+                        if (res && res.status === 200) {
+                            caches.open(cacheName).then(function (cache) {
+                                cache.delete(requestToCache);
+                                cache.put(requestToCache, res.clone());
+                            });
+                        }
+                    });
+                    return response;
+                }
+
+                return fetch(requestToCache).then((res) => {
+                    if (!res || res.status !== 200) {
+                        return res;
+                    }
+                    var responseToCache = res.clone();
+                    caches.open(cacheName).then(function (cache) {
+                        cache.put(requestToCache, responseToCache);
+                    });
+                    return res;
+                });
+            })
+        );
+    } else {
+        console.log(e.request.url)
+        return fetch(e.request);
+    }
 });
 
 // 监听推送事件 然后显示通知
