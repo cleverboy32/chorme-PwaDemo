@@ -1,9 +1,23 @@
+'use strict'
 
 let cacheName = 'pwa-demo-assets';
+// let imgCacheName = 'pwa-img';
+let filesToCache;
+
+filesToCache = [
+    '/chorme-PwaDemo',
+    '/chorme-PwaDemo/index.html',
+    '/chorme-PwaDemo/manifest.json',
+    '/chorme-PwaDemo/sw.js'
+];
 
 self.addEventListener('install', function (e) {
-    console.log('sw install');
-    e.waitUntil(self.skipWaiting());
+    e.waitUntil(
+        caches.open(cacheName).then(function (cache) {
+            console.log('sw install');
+            return cache.addAll(filesToCache);
+        })
+    );
 });
 
 // 更新缓存
@@ -13,13 +27,23 @@ self.addEventListener('activate', function (e) {
 
 self.addEventListener('fetch', (e) => {
     console.log(e.request.url);
-    if (/\.jpg$|.png$|.js$|manifest.json|.map$|.html$|.css$|\/$|sw.js/.test(e.request.url)) {
+    if (/\.jpg$|.png$|.js$|.map$|.css$/.test(e.request.url) && e.request.url.indexOf('hot-update.js') === -1) {
+        console.log(e.request.url);
         e.respondWith(
             caches.match(e.request).then(function (response) {
+                let requestToCache = e.request.clone();
                 if (response) {
+                    fetch(requestToCache).then((res) => {
+                        if (res && res.status === 200) {
+                            caches.open(cacheName).then(function (cache) {
+                                cache.delete(requestToCache);
+                                cache.put(requestToCache, res.clone());
+                            });
+                        }
+                    });
                     return response;
                 }
-                var requestToCache = e.request.clone();
+
                 return fetch(requestToCache).then((res) => {
                     if (!res || res.status !== 200) {
                         return res;
@@ -32,6 +56,8 @@ self.addEventListener('fetch', (e) => {
                 });
             })
         );
+    } else {
+        return fetch(e.request);
     }
 });
 
@@ -39,12 +65,14 @@ self.addEventListener('fetch', (e) => {
 self.addEventListener('push', function (event) {
     console.log('[Service Worker] Push Received.');
     console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+
     const title = 'Push Codelab';
     const options = {
         body: 'Yay it works.',
         icon: 'img/48.png',
         badge: 'img/48.png'
     };
+
     event.waitUntil(self.registration.showNotification(title, options));
 });
 
